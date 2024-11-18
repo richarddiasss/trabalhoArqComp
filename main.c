@@ -61,6 +61,8 @@ void roundRobin(Fila* fila_ioDisco,  Fila* fila_io_fita,  Fila* fila_io_impresso
 
             if(p.tempo_execucao <=0)
                 printf("Processo %d concluído no tempo %d\n", p.pid, (*tempo_atual));
+
+            return;
         }
         
 
@@ -93,7 +95,7 @@ int main() {
     Fila* fila_ioDisco = criar_fila(MAX_PROCESSOS);
     Fila* fila_io_fita = criar_fila(MAX_PROCESSOS);
     Fila* fila_io_Impressora = criar_fila(MAX_PROCESSOS);
-    FILE* arquivo = fopen("processos3.txt", "r");
+    FILE* arquivo = fopen("processos.txt", "r");
 
     // Criar processos
     // Ler os processos do arquivo
@@ -108,9 +110,7 @@ int main() {
         }
     }
 
-    //imprimir_fila(fila_novos_processos);
-    
-
+    imprimir_fila(fila_novos_processos);
 
 
     // Simular o escalonamento

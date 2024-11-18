@@ -5,7 +5,7 @@
 
 #define TEMPO_DURACAO_DISCO 3
 #define TEMPO_DURACAO_FITA 2
-#define TEMPO_DURACAO_IMPRESSORA 2
+#define TEMPO_DURACAO_IMPRESSORA 1
 
 int analisar_entrada_pronto(int tempo_atual, Fila* fila_novos_processos, Fila* fila_alta_prioridade) {
 
