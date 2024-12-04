@@ -3,11 +3,11 @@
 #include <time.h>
 #include "fila.h"
 
-#define MAX_PROCESSOS 3
+#define MAX_PROCESSOS 5
 #define FATIA_TEMPO 2
 #define TEMPO_DURACAO_DISCO 3
 #define TEMPO_DURACAO_FITA 2
-#define TEMPO_DURACAO_IMPRESSORA 1
+#define TEMPO_DURACAO_IMPRESSORA 2
 
 void roundRobin(Fila* fila_ioDisco,  Fila* fila_io_fita,  Fila* fila_io_impressora,  Fila* fila_alta_prioridade, Fila* fila_baixa_prioridade, bool processoE, int* tempo_atual){
     
@@ -51,7 +51,7 @@ void roundRobin(Fila* fila_ioDisco,  Fila* fila_io_fita,  Fila* fila_io_impresso
             printf("Processo %d solicitou I/O\n", p.pid);
 
             if(p.tempo_execucao <=0)
-                printf("Processo %d concluído no tempo %d\n", p.pid, (*tempo_atual));
+                printf("Processo %d concluido no tempo %d\n", p.pid, (*tempo_atual));
     
             return;
         } else if (saiuAntesDoQuantum){
@@ -60,7 +60,7 @@ void roundRobin(Fila* fila_ioDisco,  Fila* fila_io_fita,  Fila* fila_io_impresso
             printf("Executando processo %d por %d unidades de tempo\n", p.pid, i+1);
 
             if(p.tempo_execucao <=0)
-                printf("Processo %d concluído no tempo %d\n", p.pid, (*tempo_atual));
+                printf("Processo %d concluido no tempo %d\n", p.pid, (*tempo_atual));
 
             return;
         }
@@ -68,7 +68,7 @@ void roundRobin(Fila* fila_ioDisco,  Fila* fila_io_fita,  Fila* fila_io_impresso
 
         if(p.tempo_execucao <=0){
             printf("Executando processo %d por %d unidades de tempo\n", p.pid, i+1);
-            printf("Processo %d concluído no tempo %d\n", p.pid, (*tempo_atual));
+            printf("Processo %d concluido no tempo %d\n", p.pid, (*tempo_atual));
 
             return;
         }
@@ -95,7 +95,7 @@ int main() {
     Fila* fila_ioDisco = criar_fila(MAX_PROCESSOS);
     Fila* fila_io_fita = criar_fila(MAX_PROCESSOS);
     Fila* fila_io_Impressora = criar_fila(MAX_PROCESSOS);
-    FILE* arquivo = fopen("processos.txt", "r");
+    FILE* arquivo = fopen("processos5.txt", "r");
 
     // Criar processos
     // Ler os processos do arquivo
@@ -110,7 +110,7 @@ int main() {
         }
     }
 
-    imprimir_fila(fila_novos_processos);
+    //imprimir_fila(fila_novos_processos);
 
 
     // Simular o escalonamento

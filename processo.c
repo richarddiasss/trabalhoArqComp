@@ -5,7 +5,7 @@
 
 #define TEMPO_DURACAO_DISCO 3
 #define TEMPO_DURACAO_FITA 2
-#define TEMPO_DURACAO_IMPRESSORA 1
+#define TEMPO_DURACAO_IMPRESSORA 2
 
 int analisar_entrada_pronto(int tempo_atual, Fila* fila_novos_processos, Fila* fila_alta_prioridade) {
 
@@ -17,8 +17,7 @@ int analisar_entrada_pronto(int tempo_atual, Fila* fila_novos_processos, Fila* f
             //printf("Processo %d pronto para execução\n", fila_novos_processos->processos[i].pid);
 
             enfileirar(fila_alta_prioridade, fila_novos_processos->processos[i]);
-            //printf("fila alta priori processos\n");
-            //imprimir_fila(fila_alta_prioridade);
+            printf("processo %d  foi inicializado na fila de alta prioridade\n", fila_novos_processos->processos[i].pid);
             i = (i + 1) % fila_novos_processos->capacidade;
             desenfileirar(fila_novos_processos);
             //printf("fila novos processos\n");
@@ -65,6 +64,7 @@ bool preempcao(Fila* fila_ioDisco,  Fila* fila_io_fita,  Fila* fila_io_impressor
                 break;
         } else {
             enfileirar(fila_baixa_prioridade, io_p);
+            printf("processo %d saiu do I/O e entrou na fila de baixa prioridade\n", io_p.pid);
             //enfileirar(fila_baixa_prioridade, p);
             preempcao = true;
             break;
@@ -86,6 +86,7 @@ bool preempcao(Fila* fila_ioDisco,  Fila* fila_io_fita,  Fila* fila_io_impressor
                 break;
         } else {
             enfileirar(fila_alta_prioridade, io_p);
+            printf("processo %d saiu do I/O e entrou na fila de alta prioridade\n", io_p.pid);
             //enfileirar(fila_baixa_prioridade, p);
             preempcao = true;
             break;
@@ -106,6 +107,7 @@ bool preempcao(Fila* fila_ioDisco,  Fila* fila_io_fita,  Fila* fila_io_impressor
                 break;
         } else {
             enfileirar(fila_alta_prioridade, io_p);
+            printf("processo %d saiu do I/O e entrou na fila de alta prioridade\n", io_p.pid);
             //enfileirar(fila_baixa_prioridade, p);
             preempcao = true;
             break;
