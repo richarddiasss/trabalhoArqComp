@@ -17,7 +17,7 @@ int analisar_entrada_pronto(int tempo_atual, Fila* fila_novos_processos, Fila* f
             //printf("Processo %d pronto para execução\n", fila_novos_processos->processos[i].pid);
 
             enfileirar(fila_alta_prioridade, fila_novos_processos->processos[i]);
-            printf("processo %d  foi inicializado na fila de alta prioridade\n", fila_novos_processos->processos[i].pid);
+            printf("processo %d foi inicializado na fila de alta prioridade. (clock: %d)\n", fila_novos_processos->processos[i].pid, tempo_atual); 
             i = (i + 1) % fila_novos_processos->capacidade;
             desenfileirar(fila_novos_processos);
             //printf("fila novos processos\n");
@@ -47,7 +47,7 @@ int analisa_prontidao(int tempo_atual, Fila* fila_novos_processos, Fila* fila_al
 }
 
 
-bool preempcao(Fila* fila_ioDisco,  Fila* fila_io_fita,  Fila* fila_io_impressora,  Fila* fila_alta_prioridade, Fila* fila_baixa_prioridade) {
+bool preempcao(Fila* fila_ioDisco,  Fila* fila_io_fita,  Fila* fila_io_impressora,  Fila* fila_alta_prioridade, Fila* fila_baixa_prioridade, int tempo_atual) {
     // Verificar processos na fila de I/O
     int percorre = 0;
     bool preempcao = false;
@@ -64,7 +64,7 @@ bool preempcao(Fila* fila_ioDisco,  Fila* fila_io_fita,  Fila* fila_io_impressor
                 break;
         } else {
             enfileirar(fila_baixa_prioridade, io_p);
-            printf("processo %d saiu do I/O e entrou na fila de baixa prioridade\n", io_p.pid);
+            printf("processo %d saiu do I/O e entrou na fila de baixa prioridade. (clock: %d)\n", io_p.pid, tempo_atual);
             //enfileirar(fila_baixa_prioridade, p);
             preempcao = true;
             break;
@@ -86,7 +86,7 @@ bool preempcao(Fila* fila_ioDisco,  Fila* fila_io_fita,  Fila* fila_io_impressor
                 break;
         } else {
             enfileirar(fila_alta_prioridade, io_p);
-            printf("processo %d saiu do I/O e entrou na fila de alta prioridade\n", io_p.pid);
+            printf("processo %d saiu do I/O e entrou na fila de alta prioridade. (clock: %d)\n", io_p.pid, tempo_atual);
             //enfileirar(fila_baixa_prioridade, p);
             preempcao = true;
             break;
@@ -107,7 +107,7 @@ bool preempcao(Fila* fila_ioDisco,  Fila* fila_io_fita,  Fila* fila_io_impressor
                 break;
         } else {
             enfileirar(fila_alta_prioridade, io_p);
-            printf("processo %d saiu do I/O e entrou na fila de alta prioridade\n", io_p.pid);
+            printf("processo %d saiu do I/O e entrou na fila de alta prioridade. (clock: %d)\n", io_p.pid, tempo_atual);
             //enfileirar(fila_baixa_prioridade, p);
             preempcao = true;
             break;
@@ -126,7 +126,7 @@ bool preempcao(Fila* fila_ioDisco,  Fila* fila_io_fita,  Fila* fila_io_impressor
 }
 
 
-bool analisar_io_processo(Fila* fila_ioDisco,  Fila* fila_io_fita,  Fila* fila_io_impressora, Processo* p){
+bool analisar_io_processo(Fila* fila_ioDisco,  Fila* fila_io_fita,  Fila* fila_io_impressora, Processo* p, int tempo_atual) {
 
     if(p->tempo_ativa_io == 0)
         return false;

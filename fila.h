@@ -31,9 +31,9 @@ Processo desenfileirar(Fila* f);
 void imprimir_fila(Fila* f);
 
 //Funçoes para manipular processos
-extern int analisar_entrada_pronto(int tempo_atual, Fila* fila_novos_processos, Fila* fila_alta_prioridade);
+extern int analisar_entrada_pronto(int tempo_atual, Fila* fila_novos_processos, Fila* fila_alta_prioridadel);
 extern int analisa_prontidao(int tempo_atual, Fila* fila_novos_processos, Fila* fila_alta_prioridade);
-extern bool preempcao(Fila* fila_ioDisco, Fila* fila_io_fita, Fila* fila_io_impressora, Fila* fila_alta_prioridade, Fila* fila_baixa_prioridade);
-extern bool analisar_io_processo(Fila* fila_ioDisco, Fila* fila_io_fita, Fila* fila_io_impressora, Processo* p);
+extern bool preempcao(Fila* fila_ioDisco, Fila* fila_io_fita, Fila* fila_io_impressora, Fila* fila_alta_prioridade, Fila* fila_baixa_prioridad, int tempo_atual);
+extern bool analisar_io_processo(Fila* fila_ioDisco, Fila* fila_io_fita, Fila* fila_io_impressora, Processo* p, int tempo_atual);
 
 #endif
